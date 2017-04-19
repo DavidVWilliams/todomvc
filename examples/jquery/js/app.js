@@ -70,7 +70,6 @@ jQuery(function ($) {
 			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
 			this.renderFooter();
 			$('#new-todo').focus();
-			// util.store('todos-jquery', this.todos);
 		},
 		renderFooter: function () {
 			var todoCount = this.todos.length;
@@ -165,7 +164,6 @@ jQuery(function ($) {
 				e.target.blur();
 			}
 
-      // if (e.which === ESCAPE_KEY || (e.which === ESCAPE_KEY && e.target.value === '')) {
 			if (e.which === ESCAPE_KEY) {
 				$(e.target).data('abort', true).blur();
 			}
