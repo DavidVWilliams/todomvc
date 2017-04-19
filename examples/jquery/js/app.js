@@ -70,7 +70,6 @@ jQuery(function ($) {
 			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
 			this.renderFooter();
 			$('#new-todo').focus();
-			util.store('todos-jquery', this.todos);
 		},
 		renderFooter: function () {
 			var todoCount = this.todos.length;
@@ -145,6 +144,8 @@ jQuery(function ($) {
 				title: val,
 				completed: false
 			});
+			
+			util.store('todos-jquery', this.todos);			
 
 			$input.val('');
 
