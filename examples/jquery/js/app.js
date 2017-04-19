@@ -70,6 +70,7 @@ jQuery(function ($) {
 			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
 			this.renderFooter();
 			$('#new-todo').focus();
+			// util.store('todos-jquery', this.todos);
 		},
 		renderFooter: function () {
 			var todoCount = this.todos.length;
@@ -144,16 +145,15 @@ jQuery(function ($) {
 				title: val,
 				completed: false
 			});
-			
-			util.store('todos-jquery', this.todos);			
 
+      util.store('todos-jquery', this.todos);      
 			$input.val('');
-
 			this.render();
 		},
 		toggle: function (e) {
 			var i = this.indexFromEl(e.target);
 			this.todos[i].completed = !this.todos[i].completed;
+			util.store('todos-jquery', this.todos); 
 			this.render();
 		},
 		edit: function (e) {
@@ -165,6 +165,7 @@ jQuery(function ($) {
 				e.target.blur();
 			}
 
+      // if (e.which === ESCAPE_KEY || (e.which === ESCAPE_KEY && e.target.value === '')) {
 			if (e.which === ESCAPE_KEY) {
 				$(e.target).data('abort', true).blur();
 			}
@@ -173,8 +174,8 @@ jQuery(function ($) {
 			var el = e.target;
 			var $el = $(el);
 			var val = $el.val().trim();
-
-			if (!val) {
+      
+      if (val !== '' && !val) {
 				this.destroy(e);
 				return;
 			}
@@ -184,11 +185,12 @@ jQuery(function ($) {
 			} else {
 				this.todos[this.indexFromEl(el)].title = val;
 			}
-
+			util.store('todos-jquery', this.todos); 
 			this.render();
 		},
 		destroy: function (e) {
 			this.todos.splice(this.indexFromEl(e.target), 1);
+			util.store('todos-jquery', this.todos); 
 			this.render();
 		}
 	};
