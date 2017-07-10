@@ -48,6 +48,7 @@ jQuery(function($) {
       new Router({
         '/:filter': function(filter) {
           this.filter = filter;
+          this.storeTodos();          
           this.render();
         }.bind(this)
       }).init('/all');
